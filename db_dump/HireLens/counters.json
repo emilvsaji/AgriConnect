@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "companies",
+    "seq": 3
+  },
+  {
+    "_id": "users",
+    "seq": 14
+  },
+  {
+    "_id": "skills",
+    "seq": 27
+  },
+  {
+    "_id": "jobs",
+    "seq": 7
+  },
+  {
+    "_id": "applications",
+    "seq": 11
+  },
+  {
+    "_id": "resumes",
+    "seq": 2
+  },
+  {
+    "_id": "notifications",
+    "seq": 12
+  },
+  {
+    "_id": "interviews",
+    "seq": 4
+  },
+  {
+    "_id": "messages",
+    "seq": 1
+  }
+]

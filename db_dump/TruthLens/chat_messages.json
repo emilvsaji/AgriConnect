@@ -1,0 +1,60 @@
+[
+  {
+    "_id": "6983248cdff04f22eef1fa7b",
+    "username": "jewel",
+    "content": "hi",
+    "image_url": null,
+    "created_at": "2026-02-04T10:50:52.742Z",
+    "likes": [
+      "jewel"
+    ]
+  },
+  {
+    "_id": "698324addff04f22eef1fa7c",
+    "username": "jewel",
+    "content": "",
+    "image_url": null,
+    "created_at": "2026-02-04T10:51:25.885Z"
+  },
+  {
+    "_id": "698326aadff04f22eef1fa7d",
+    "username": "jewel",
+    "content": "hi",
+    "image_url": null,
+    "created_at": "2026-02-04T10:59:54.170Z"
+  },
+  {
+    "_id": "6985db465ede2968c73064c9",
+    "username": "jewel",
+    "content": "",
+    "image_url": null,
+    "created_at": "2026-02-06T12:15:02.675Z"
+  },
+  {
+    "_id": "6985dc165ede2968c73064ca",
+    "username": "jewel",
+    "content": "broo",
+    "image_url": null,
+    "created_at": "2026-02-06T12:18:30.277Z"
+  },
+  {
+    "_id": "698d8429e2bcbc77ab611a45",
+    "username": "jewel",
+    "content": "",
+    "image_url": "http://localhost:8000/static/images/1770882089.091961_IMG_3964.PNG",
+    "parent_id": null,
+    "likes": [
+      "jewel"
+    ],
+    "created_at": "2026-02-12T07:41:29.096Z"
+  },
+  {
+    "_id": "698d8632e2bcbc77ab611a46",
+    "username": "jewel",
+    "content": "goo",
+    "image_url": null,
+    "parent_id": "6983248cdff04f22eef1fa7b",
+    "likes": [],
+    "created_at": "2026-02-12T07:50:10.711Z"
+  }
+]

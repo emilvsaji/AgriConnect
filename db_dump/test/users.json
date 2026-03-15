@@ -1,0 +1,86 @@
+[
+  {
+    "_id": "68de2f61372d7dd8bb17411b",
+    "name": "admin admin",
+    "email": "admin@gmail.com",
+    "password": "$2b$10$tVCZ7etSmwDBDI842lC0uuohyE1jkIzQUwvFUp8qV5qFOD3UysoPq",
+    "__v": 0
+  },
+  {
+    "_id": "68e102626c33576f9d6a5f4e",
+    "name": "Akshay Joseph Sayee",
+    "email": "akshay999@gmail.com",
+    "password": "$2b$10$wdYf7GHzrcz8pawxY9u2POp0BdY0EFMOrb10DS6RLNF4Z8ICOpEz6",
+    "__v": 0
+  },
+  {
+    "_id": "68e141ee5f7869f10af3a942",
+    "name": "Jitto Joseph",
+    "email": "jittojoseph342@gmail.com",
+    "password": "$2b$10$bMNpEi7zdULJwGXgXVZESOb4/qTBYZNN6R9ptK/17elhPKdsx4cDW",
+    "__v": 0
+  },
+  {
+    "_id": "68e144035f7869f10af3a953",
+    "name": "Mhmd Zaayid",
+    "email": "zayid23@gmail.com",
+    "password": "$2b$10$jyCbrbQTwMV5uxcmLgE6AO20GGpAEkUHwK4.cQnM.nHjROsIrGm.2",
+    "__v": 0
+  },
+  {
+    "_id": "68e145735f7869f10af3a974",
+    "name": "Gokul AM",
+    "email": "gokul625@gmail.com",
+    "password": "$2b$10$9jh6tNB1HUwmD0E04vY23.hdcQBjTuRJN4MW7NVjJVRSGCuOEuXi2",
+    "__v": 0
+  },
+  {
+    "_id": "68e1470e5a3ed3feed466f0b",
+    "name": "Gokul P M",
+    "email": "pmgokul05@gmail.com",
+    "password": "$2b$10$.YW3Pz1kprM6pGffIF6YzOjb55FqUypiR5ULdgHut7xR5i8xJ.DA6",
+    "__v": 0
+  },
+  {
+    "_id": "68e14defe1b706636141ff26",
+    "name": "Jewel Thomas",
+    "email": "jewel2334@gmail.com",
+    "password": "$2b$10$DlhlVZaWgHBDJGhQzv9cCupzHf/kuLBHEi34kg7rd9VNFwLhyRb/e",
+    "__v": 0
+  },
+  {
+    "_id": "68e14ea3d44077c62a7a86fd",
+    "name": "വട്ടോളി ",
+    "email": "vattoli2005@gmail.com",
+    "password": "$2b$10$XniiRnxqPbqQoqaY5sDAj.mNGgZ.gYDMGPw30./jEunw4caS5.6Oi",
+    "__v": 0
+  },
+  {
+    "_id": "68e16391a27b111e78a07c94",
+    "name": "Emil V Saji",
+    "email": "emmilpro4@gmail.com",
+    "password": "$2b$10$9c464WgFtrBuU0EYwxeVGeRd9oQKVkxXFf0t1jlp7jFwmmbbXfasK",
+    "__v": 0
+  },
+  {
+    "_id": "68e2984ecb88c8211f8b992f",
+    "name": "Emil ",
+    "email": "adminpro4@gmail.com",
+    "password": "$2b$10$bx1ESwQoSf7v0AHvKE08neQFilhjBx3dPVFpg8en1HayLRhIJo4/6",
+    "__v": 0
+  },
+  {
+    "_id": "69649387fb180eadec46fd13",
+    "name": "Jewel ",
+    "email": "jewel@gmail.com",
+    "password": "$2b$10$DwTBMiFr/Tj3QEaU/dM01OKSMnMMKp.HS6.VP0E1sMr1AxmXfi16C",
+    "__v": 0
+  },
+  {
+    "_id": "6969c8239484e2f52ed9b1c0",
+    "name": "Jewel",
+    "email": "jewell@gmail.com",
+    "password": "$2b$10$HCDikX1LWMWs48K8KswMh.vdkho..NG.saO//WiyGPdmW98CVSbn2",
+    "__v": 0
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "6996c069a147889095dd96f8",
+    "id": 11,
+    "job_id": 7,
+    "candidate_id": 13,
+    "resume_url": "/uploads/resumes/07a09a9e-00ce-42c2-8f06-ed6983a118d0.pdf",
+    "cover_letter": "test",
+    "status": "rejected",
+    "ai_score": 0,
+    "ai_insights": {
+      "recommendation": "Not Recommended",
+      "strengths": [],
+      "gaps": [
+        "The submitted document is not a candidate's resume.",
+        "Lacks all fundamental candidate information (e.g., work experience, educational background, skills, contact details).",
+        "Contains only a public examination schedule, which is entirely irrelevant to a job application."
+      ],
+      "matching_skills": [],
+      "missing_skills": [
+        "All professional skills (technical, soft, etc.)",
+        "Relevant work experience",
+        "Educational qualifications",
+        "Career progression details"
+      ],
+      "experience_match": "No experience information is provided in the submitted document, as it is not a candidate's resume. Therefore, no assessment of experience match can be made.",
+      "overall_assessment": "The submitted document is clearly not a candidate's resume but an examination schedule. It provides zero information about a candidate's qualifications, experience, or skills. As such, it is impossible to evaluate against any job requirements or professional standards."
+    },
+    "applied_at": "2026-02-19T07:48:57.885Z",
+    "updated_at": "2026-02-19T07:51:50.688Z"
+  }
+]

@@ -1,0 +1,154 @@
+[
+  {
+    "_id": "68deab4a2b67178edd9fcbba",
+    "customerDetails": {
+      "name": "admin admin",
+      "address": "admin",
+      "city": "kottyam",
+      "postalCode": "686578"
+    },
+    "products": [
+      {
+        "productId": "68de9ff55f07fdb4ae75a3a0",
+        "name": "test",
+        "price": "50",
+        "_id": "68deab4a2b67178edd9fcbbb"
+      }
+    ],
+    "totalAmount": 100,
+    "farmer": "admin admin",
+    "status": "Pending",
+    "createdAt": "2025-10-02T16:41:46.835Z",
+    "updatedAt": "2025-10-02T16:41:46.835Z",
+    "__v": 0
+  },
+  {
+    "_id": "68e15194093a46f1aa099c62",
+    "customerDetails": {
+      "name": "Emil Emiku",
+      "email": "adminpro4@gmail.com",
+      "phone": "8568975489",
+      "preferredPickupTime": "2025-10-04T00:25",
+      "paymentMethod": "pickup"
+    },
+    "products": [
+      {
+        "productId": "68e12f2b21bff4de20aecb29",
+        "name": "Organic Banana",
+        "quantity": 1,
+        "price": "₹60/kg",
+        "_id": "68e15194093a46f1aa099c63"
+      }
+    ],
+    "totalAmount": 60,
+    "status": "Ready for Pickup",
+    "farmer": "Akshay Joseph Sayee",
+    "createdAt": "2025-10-04T16:55:48.139Z",
+    "updatedAt": "2025-10-04T17:01:50.705Z",
+    "__v": 0
+  },
+  {
+    "_id": "68e15849f739d1bf3cbbe0fb",
+    "customerDetails": {
+      "name": "Emil Emiku",
+      "email": "adminpro4@gmail.com",
+      "phone": "8568975489",
+      "preferredPickupTime": "2025-10-04T22:58",
+      "paymentMethod": "pickup",
+      "specialInstructions": ""
+    },
+    "products": [
+      {
+        "productId": "68e14d19d44077c62a7a86cb",
+        "name": "Elephant Foot Yam ( ചേന )",
+        "price": "NaN",
+        "quantity": 1,
+        "_id": "68e15849f739d1bf3cbbe0fc"
+      }
+    ],
+    "totalAmount": 80,
+    "status": "Confirmed",
+    "farmer": "Gokul P M",
+    "createdAt": "2025-10-04T17:24:25.963Z",
+    "updatedAt": "2025-10-04T17:24:25.963Z",
+    "__v": 0
+  },
+  {
+    "_id": "68e20ea42c9653013a6c78a8",
+    "customerDetails": {
+      "name": "Jitto Joseph",
+      "email": "jittojosephcareer@gmail.com",
+      "phone": "9645832757",
+      "preferredPickupTime": "2025-10-15T11:52",
+      "paymentMethod": "pickup",
+      "specialInstructions": "test"
+    },
+    "products": [
+      {
+        "productId": "68e142dd5f7869f10af3a946",
+        "name": "Jack Fruit",
+        "price": "NaN",
+        "quantity": 1,
+        "_id": "68e20ea42c9653013a6c78a9"
+      }
+    ],
+    "totalAmount": 300,
+    "status": "Confirmed",
+    "farmer": "Jitto Joseph",
+    "createdAt": "2025-10-05T06:22:28.078Z",
+    "updatedAt": "2025-10-05T06:22:28.078Z",
+    "__v": 0
+  },
+  {
+    "_id": "68e516db49954a21088ccd09",
+    "customerDetails": {
+      "name": "Abcdd",
+      "email": "abcd@gmail.com",
+      "phone": "9074589629",
+      "preferredPickupTime": "2025-10-07T19:03",
+      "paymentMethod": "online",
+      "specialInstructions": ""
+    },
+    "products": [
+      {
+        "productId": "68e142dd5f7869f10af3a946",
+        "name": "Jack Fruit",
+        "price": "NaN",
+        "quantity": 1,
+        "_id": "68e516db49954a21088ccd0a"
+      }
+    ],
+    "totalAmount": 300,
+    "status": "Confirmed",
+    "farmer": "Jitto Joseph",
+    "createdAt": "2025-10-07T13:34:20.002Z",
+    "updatedAt": "2025-10-07T13:34:20.002Z",
+    "__v": 0
+  },
+  {
+    "_id": "6969c86c9484e2f52ed9b1c8",
+    "customerDetails": {
+      "name": "Jewel",
+      "email": "jewell@gmail.com",
+      "phone": "9061336064",
+      "preferredPickupTime": "2026-01-16T10:41",
+      "paymentMethod": "pickup",
+      "specialInstructions": ""
+    },
+    "products": [
+      {
+        "productId": "68e142dd5f7869f10af3a946",
+        "name": "Jack Fruit",
+        "price": "NaN",
+        "quantity": 1,
+        "_id": "6969c86c9484e2f52ed9b1c9"
+      }
+    ],
+    "totalAmount": 300,
+    "status": "Confirmed",
+    "farmer": "Jitto Joseph",
+    "createdAt": "2026-01-16T05:11:08.371Z",
+    "updatedAt": "2026-01-16T05:11:08.371Z",
+    "__v": 0
+  }
+]

@@ -1,0 +1,81 @@
+[
+  {
+    "_id": "697e26b5f8260d6fcf384afb",
+    "name": "Admin",
+    "email": "admin@lawchatpro.com",
+    "hashed_password": "$2b$12$YEdCRkOt7YN2L36sjTQCQOWCigr5SkhFVyG1Awi5J7uigz5sFO5Q.",
+    "role": "admin",
+    "created_at": "2026-01-31T15:58:45.464Z"
+  },
+  {
+    "_id": "69aa934f012e45111754b6b7",
+    "name": "Jesvin",
+    "email": "jesvin@gmail.com",
+    "hashed_password": "$2b$12$zv25dL1w115mlClUVU9.guPvwSAzd8pivLC7Zdn8YQotiSeZHRue6",
+    "role": "lawyer",
+    "lawyer_status": "approved",
+    "lawyer_info": {
+      "specializations": [
+        "Family Law"
+      ],
+      "experience_years": 3,
+      "bar_council_id": "123456",
+      "bio": null,
+      "contact_phone": "8848598246",
+      "location": "kottyam",
+      "rating": 0,
+      "availability": "Available"
+    },
+    "created_at": "2026-03-06T08:41:51.748Z"
+  },
+  {
+    "_id": "69b23fdccdce2736e5359d34",
+    "name": "Adonis",
+    "email": "adoni2005@gmail.com",
+    "hashed_password": "$2b$12$dFU8OghOdXgJZmLMPffbUuClqKpDtknfqQ8qk0Gp2M6DBHl2QFpcm",
+    "role": "user",
+    "created_at": "2026-03-12T04:23:56.533Z"
+  },
+  {
+    "_id": "69b24094cdce2736e5359d35",
+    "name": "Akshay",
+    "email": "adonis2005@gmail.com",
+    "hashed_password": "$2b$12$Jxg3/x1k6D5VQgjlyaxlG.9vl7tsGkJczqKB0nufoLneTouoo0j4m",
+    "role": "lawyer",
+    "lawyer_status": "approved",
+    "lawyer_info": {
+      "specializations": [
+        "Criminal Law"
+      ],
+      "experience_years": 4,
+      "bar_council_id": "6654544",
+      "bio": "gcjchdgfuwgjchdsc",
+      "contact_phone": "9567884807",
+      "location": "banglore",
+      "rating": 0,
+      "availability": "Available"
+    },
+    "created_at": "2026-03-12T04:27:00.961Z"
+  },
+  {
+    "_id": "69b3c65fe5a439ddeac2db51",
+    "name": "jewel",
+    "email": "adonis@gmail.com",
+    "hashed_password": "$2b$12$6MStGf9/1odyjp79EAPgXOEUTOV/Aff8j/pLS..iNQRa/0smw..Qa",
+    "role": "lawyer",
+    "lawyer_status": "approved",
+    "lawyer_info": {
+      "specializations": [
+        "Family Law"
+      ],
+      "experience_years": 2,
+      "bar_council_id": "123",
+      "bio": null,
+      "contact_phone": "9447175273",
+      "location": "kottyam",
+      "rating": 0,
+      "availability": "Available"
+    },
+    "created_at": "2026-03-13T08:10:07.261Z"
+  }
+]

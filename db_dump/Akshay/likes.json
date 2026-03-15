@@ -1,0 +1,20 @@
+[
+  {
+    "_id": "6980d3e83784a45b3c3edd33",
+    "user_id": "697f9b3a78c95d6dd7121fcd",
+    "article_id": "6980cff71ab79bf0cb516480",
+    "created_at": "2026-02-02T16:42:16.491Z"
+  },
+  {
+    "_id": "6980d45b3784a45b3c3edd39",
+    "user_id": "697f9b3a78c95d6dd7121fcd",
+    "article_id": "6980cfbe1ab79bf0cb51647d",
+    "created_at": "2026-02-02T16:44:11.891Z"
+  },
+  {
+    "_id": "69820054b9e4328d1a6db696",
+    "user_id": "6982004fb9e4328d1a6db695",
+    "article_id": "6981fabbb9e4328d1a6db65c",
+    "created_at": "2026-02-03T14:04:04.824Z"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "_id": "699552a9f464b0aa267f02df",
+    "id": 1,
+    "name": "TechCorp Inc.",
+    "description": "Leading technology company specializing in AI and cloud solutions",
+    "industry": "Technology",
+    "size": "201-500",
+    "website": "https://techcorp.example.com",
+    "logo_url": null,
+    "location": "San Francisco, CA",
+    "is_active": true,
+    "created_at": "2026-02-18T05:48:25.677Z",
+    "updated_at": "2026-02-18T05:48:25.677Z"
+  },
+  {
+    "_id": "699552a9f464b0aa267f02e0",
+    "id": 2,
+    "name": "InnovateCo",
+    "description": "Innovation-driven startup building next-gen products",
+    "industry": "Software",
+    "size": "51-200",
+    "website": "https://innovateco.example.com",
+    "logo_url": null,
+    "location": "New York, NY",
+    "is_active": true,
+    "created_at": "2026-02-18T05:48:25.817Z",
+    "updated_at": "2026-02-18T05:48:25.817Z"
+  },
+  {
+    "_id": "699552a9f464b0aa267f02e1",
+    "id": 3,
+    "name": "DataSystems Ltd",
+    "description": "Enterprise data solutions and analytics",
+    "industry": "Data & Analytics",
+    "size": "501-1000",
+    "website": "https://datasystems.example.com",
+    "logo_url": null,
+    "location": "Seattle, WA",
+    "is_active": true,
+    "created_at": "2026-02-18T05:48:25.934Z",
+    "updated_at": "2026-02-18T05:48:25.934Z"
+  }
+]

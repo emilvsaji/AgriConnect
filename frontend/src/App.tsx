@@ -16,6 +16,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignUpPage';
 import UploadProductPage from './pages/SellYourProduct'; 
 import FarmerDashboard from './pages/DashboardPage';
+import AdminDashboard from './pages/AdminDashboard';
 import FarmersTechTools from './pages/FarmersArea';
 import AnimalProducts from './components/homepage/AnimalProducts'; 
 import RentToolsPage from './pages/RentToolsPage';
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="/upload-product" element={<UploadProductPage />} />
           <Route path="/upload-product/:productId" element={<UploadProductPage />} />
           <Route path="/dashboard" element={<FarmerDashboard />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/farmers-area" element={<FarmersTechTools />} />
 
           <Route path="/rent-tools" element={<RentToolsPage />} />

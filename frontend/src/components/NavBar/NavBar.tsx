@@ -6,6 +6,7 @@ import {
   ShoppingCartIcon,
   UserCircleIcon,
   SparklesIcon,
+  ShieldCheckIcon,
 } from "@heroicons/react/24/solid";
 import { useCart } from "../../context/CartContext";
 import { useAuth } from "../../context/AuthenticationContext";
@@ -128,6 +129,15 @@ const Navbar = () => {
                     <UserCircleIcon className="h-4 w-4 mr-3" />
                     My Products
                   </Link>
+                  {user.role === "admin" && (
+                    <Link
+                      to="/admin"
+                      className="flex items-center px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors font-medium"
+                    >
+                      <ShieldCheckIcon className="h-4 w-4 mr-3" />
+                      Admin Dashboard
+                    </Link>
+                  )}
                   <div className="border-t border-gray-100 my-1"></div>
                   <button
                     onClick={handleLogout}
@@ -228,6 +238,14 @@ const Navbar = () => {
                 >
                   🏪 My Products
                 </Link>
+                {user.role === "admin" && (
+                  <Link
+                    to="/admin"
+                    className="block px-3 py-3 rounded-lg text-base font-medium text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors"
+                  >
+                    🛡️ Admin Dashboard
+                  </Link>
+                )}
                 <div className="border-t border-gray-200 my-3"></div>
                 <button
                   onClick={handleLogout}

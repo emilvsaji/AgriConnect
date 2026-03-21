@@ -18,9 +18,63 @@ app.use(cors());
 app.use(express.json());
 
 // --- Database Connection ---
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connected successfully.'))
-  .catch(err => console.error('MongoDB connection error:', err));
+const seedAdminUser = async () => {
+  try {
+    const adminExists = await User.findOne({ email: 'admin@agriconnect.com' });
+    if (!adminExists) {
+      await User.create({ name: 'Admin', email: 'admin@agriconnect.com', password: 'admin123', role: 'admin' });
+      console.log('Admin user seeded successfully.');
+    } else if (adminExists.role !== 'admin') {
+      adminExists.role = 'admin';
+      await adminExists.save();
+      console.log('Admin role updated.');
+    }
+  } catch (err) {
+    console.error('Admin seed error:', err);
+  }
+};
+
+const connectMongo = async () => {
+  const primaryMongoUri = process.env.MONGO_URI?.trim();
+  const fallbackMongoUri = process.env.MONGO_URI_DIRECT?.trim();
+
+  if (!primaryMongoUri) {
+    throw new Error('MONGO_URI is missing in .env');
+  }
+
+  const uriCandidates = [{ name: 'MONGO_URI', uri: primaryMongoUri }];
+  if (fallbackMongoUri && fallbackMongoUri !== primaryMongoUri) {
+    uriCandidates.push({ name: 'MONGO_URI_DIRECT', uri: fallbackMongoUri });
+  }
+
+  let lastError;
+
+  for (const candidate of uriCandidates) {
+    try {
+      await mongoose.connect(candidate.uri, { serverSelectionTimeoutMS: 10000 });
+      console.log(`MongoDB connected successfully using ${candidate.name}.`);
+      return;
+    } catch (error) {
+      lastError = error;
+      if (candidate.name === 'MONGO_URI' && error?.syscall === 'querySrv') {
+        console.warn('SRV DNS lookup failed for MONGO_URI. Trying MONGO_URI_DIRECT if configured...');
+      } else {
+        console.warn(`MongoDB connection attempt failed for ${candidate.name}: ${error.message}`);
+      }
+    }
+  }
+
+  throw lastError;
+};
+
+connectMongo()
+  .then(seedAdminUser)
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+    if (err?.syscall === 'querySrv') {
+      console.error('Your network DNS rejected SRV lookup. Add a non-SRV Atlas URI as MONGO_URI_DIRECT in backend/.env.');
+    }
+  });
 
 // ---=============================---
 // ---        API ROUTES           ---
@@ -28,8 +82,13 @@ mongoose.connect(process.env.MONGO_URI)
 
 // --- Authentication Routes ---
 app.post('/api/auth/signup', async (req, res) => {
-  const { name, email, password } = req.body;
+  let { name, email, password } = req.body;
   try {
+    // Normalize inputs
+    name = name?.trim();
+    email = email?.trim().toLowerCase();
+    password = password?.trim();
+
     if (!name || !email || !password) {
       return res.status(400).json({ message: 'Please provide all required fields' });
     }
@@ -45,7 +104,8 @@ app.post('/api/auth/signup', async (req, res) => {
     res.status(201).json({
       _id: user._id,
       name: user.name,
-      email: user.email
+      email: user.email,
+      role: user.role
     });
   } catch (error) {
     console.error('Signup error:', error);
@@ -57,8 +117,12 @@ app.post('/api/auth/signup', async (req, res) => {
 });
 
 app.post('/api/auth/login', async (req, res) => {
-  const { email, password } = req.body;
+  let { email, password } = req.body;
   try {
+    // Normalize inputs
+    email = email?.trim().toLowerCase();
+    password = password?.trim();
+
     if (!email || !password) {
       return res.status(400).json({ message: 'Please provide both email and password' });
     }
@@ -75,7 +139,8 @@ app.post('/api/auth/login', async (req, res) => {
       res.json({
         _id: user._id,
         name: user.name,
-        email: user.email
+        email: user.email,
+        role: user.role
       });
     } else {
       res.status(401).json({ message: 'Invalid password' });
@@ -513,6 +578,134 @@ app.get('/api/tools/:id', async (req, res) => {
     res.json(tool);
   } catch (error) {
     res.status(500).json({ message: 'Server error fetching tool' });
+  }
+});
+
+
+// --- ADMIN ROUTES ---
+
+// Admin middleware - checks x-user-id header and verifies admin role
+const requireAdmin = async (req, res, next) => {
+  try {
+    const userId = req.headers['x-user-id'];
+    if (!userId) return res.status(401).json({ message: 'Unauthorized' });
+    const user = await User.findById(userId);
+    if (!user || user.role !== 'admin') return res.status(403).json({ message: 'Forbidden: Admin access required' });
+    req.adminUser = user;
+    next();
+  } catch (error) {
+    res.status(500).json({ message: 'Server error checking admin access' });
+  }
+};
+
+// Admin stats
+app.get('/api/admin/stats', requireAdmin, async (req, res) => {
+  try {
+    const [userCount, productCount, orderCount, toolCount, revenueResult] = await Promise.all([
+      User.countDocuments(),
+      Product.countDocuments(),
+      Order.countDocuments(),
+      Tool.countDocuments(),
+      Order.aggregate([{ $group: { _id: null, total: { $sum: '$totalAmount' } } }]),
+    ]);
+    res.json({
+      users: userCount,
+      products: productCount,
+      orders: orderCount,
+      tools: toolCount,
+      revenue: revenueResult[0]?.total || 0,
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error fetching admin stats' });
+  }
+});
+
+// Admin - list all users
+app.get('/api/admin/users', requireAdmin, async (req, res) => {
+  try {
+    const users = await User.find({}).select('-password');
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error fetching users' });
+  }
+});
+
+// Admin - delete user
+app.delete('/api/admin/users/:id', requireAdmin, async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.json({ message: 'User deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error deleting user' });
+  }
+});
+
+// Admin - list all products
+app.get('/api/admin/products', requireAdmin, async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error fetching products' });
+  }
+});
+
+// Admin - delete product
+app.delete('/api/admin/products/:id', requireAdmin, async (req, res) => {
+  try {
+    const product = await Product.findByIdAndDelete(req.params.id);
+    if (!product) return res.status(404).json({ message: 'Product not found' });
+    res.json({ message: 'Product deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error deleting product' });
+  }
+});
+
+// Admin - list all orders
+app.get('/api/admin/orders', requireAdmin, async (req, res) => {
+  try {
+    const orders = await Order.find({}).sort({ createdAt: -1 });
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error fetching orders' });
+  }
+});
+
+// Admin - update order status
+app.put('/api/admin/orders/:id/status', requireAdmin, async (req, res) => {
+  try {
+    const { status } = req.body;
+    const validStatuses = ['Confirmed', 'Ready for Pickup', 'Completed'];
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({ message: `Invalid status. Must be one of: ${validStatuses.join(', ')}` });
+    }
+    const order = await Order.findByIdAndUpdate(req.params.id, { status }, { new: true });
+    if (!order) return res.status(404).json({ message: 'Order not found' });
+    res.json({ message: 'Order status updated', order });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error updating order status' });
+  }
+});
+
+// Admin - list all tools
+app.get('/api/admin/tools', requireAdmin, async (req, res) => {
+  try {
+    const tools = await Tool.find({}).populate('listedBy', 'name');
+    res.json(tools);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error fetching tools' });
+  }
+});
+
+// Admin - delete tool
+app.delete('/api/admin/tools/:id', requireAdmin, async (req, res) => {
+  try {
+    const tool = await Tool.findByIdAndDelete(req.params.id);
+    if (!tool) return res.status(404).json({ message: 'Tool not found' });
+    res.json({ message: 'Tool deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error deleting tool' });
   }
 });
 

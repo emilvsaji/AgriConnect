@@ -32,3 +32,4 @@ Thumbs.db
 /frontend/node_modules
 /db_dump
 /backend/node_modules
+/test

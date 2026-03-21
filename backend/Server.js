@@ -435,9 +435,20 @@ app.post('/api/orders', async (req, res) => {
     }
 });
 
-app.get('/api/orders/myorders/:customerName', async (req, res) => {
+app.get('/api/orders/myorders/:customerIdentifier', async (req, res) => {
   try {
-    const orders = await Order.find({ 'customerDetails.name': req.params.customerName });
+    const customerIdentifier = decodeURIComponent(req.params.customerIdentifier || '').trim();
+    if (!customerIdentifier) {
+      return res.status(400).json({ message: 'Customer identifier is required.' });
+    }
+
+    const isEmail = customerIdentifier.includes('@');
+    const orders = await Order.find(
+      isEmail
+        ? { 'customerDetails.email': customerIdentifier.toLowerCase() }
+        : { 'customerDetails.name': customerIdentifier }
+    ).sort({ createdAt: -1 });
+
     if (!orders) return res.status(404).json({ message: 'No orders found for this customer.' });
     res.json(orders);
   } catch (error) {

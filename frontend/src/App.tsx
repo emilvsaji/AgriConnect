@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 import Navbar from './components/NavBar/NavBar'; 
 import Footer from './components/Footer/Footer';
@@ -23,9 +24,20 @@ import RentToolsPage from './pages/RentToolsPage';
 import ToolDetailPage from './pages/ToolDetailPage';
 const NotFound = () => <div className="p-8 text-center min-h-screen"><h1>404 - Page Not Found</h1></div>;
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 const App = () => {
   return (
     <div className="flex flex-col min-h-screen">
+      <ScrollToTop />
       <Navbar />
       <main className="flex-grow bg-gray-50">
         <Routes>

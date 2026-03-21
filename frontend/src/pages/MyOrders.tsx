@@ -39,8 +39,9 @@ const MyOrdersPage = () => {
       }
       try {
         setLoading(true);
+        const customerIdentifier = (user.email || user.name || "").trim();
         const response = await fetch(
-          `http://localhost:5000/api/orders/myorders/${user.name}`
+          `http://localhost:5000/api/orders/myorders/${encodeURIComponent(customerIdentifier)}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch your orders.");

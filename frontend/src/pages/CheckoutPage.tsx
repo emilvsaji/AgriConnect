@@ -8,14 +8,23 @@ import {
   HiMail,
   HiClock,
   HiUser,
+  HiX,
 } from "react-icons/hi";
-import { FaLeaf, FaTractor, FaWhatsapp } from "react-icons/fa";
+import { FaLeaf, FaTractor, FaWhatsapp, FaGooglePay } from "react-icons/fa";
+import { SiPhonepe, SiPaytm } from "react-icons/si";
+import { QRCodeSVG } from "qrcode.react";
+
+// Configure your merchant UPI ID here
+const MERCHANT_UPI_ID = "agriconnect@upi"; // Replace with actual UPI ID
+const MERCHANT_NAME = "AgriConnect";
 
 const CheckoutPage = () => {
   const { cartItems, clearCart } = useCart();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [orderDetails, setOrderDetails] = useState<{ orderId: string; amount: number } | null>(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -25,6 +34,46 @@ const CheckoutPage = () => {
     paymentMethod: "online",
     specialInstructions: "",
   });
+
+  // Generate UPI payment URL
+  const generateUPIUrl = (amount: number, orderId: string) => {
+    const params = new URLSearchParams({
+      pa: MERCHANT_UPI_ID,
+      pn: MERCHANT_NAME,
+      am: amount.toFixed(2),
+      cu: "INR",
+      tn: `Order ${orderId}`,
+    });
+    return `upi://pay?${params.toString()}`;
+  };
+
+  // Check if device is mobile
+  const isMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+  };
+
+  // Handle UPI payment
+  const handleUPIPayment = () => {
+    if (!orderDetails) return;
+    const upiUrl = generateUPIUrl(orderDetails.amount, orderDetails.orderId);
+
+    if (isMobile()) {
+      // On mobile, open UPI intent
+      window.location.href = upiUrl;
+    } else {
+      // On desktop, the QR code is already shown
+      alert("Please scan the QR code with your UPI app");
+    }
+  };
+
+  // Handle payment completion
+  const handlePaymentComplete = () => {
+    setShowPaymentModal(false);
+    clearCart();
+    navigate("/order-success");
+  };
 
   const subtotal = cartItems.reduce((total, item: any) => {
     const price = parseFloat(item.price.replace("₹", ""));
@@ -116,8 +165,18 @@ const CheckoutPage = () => {
         throw new Error(data.message || "Failed to place order.");
       }
 
-      clearCart();
-      navigate("/order-success");
+      // If online payment, show payment modal
+      if (formData.paymentMethod === "online") {
+        setOrderDetails({
+          orderId: data.order?._id?.slice(-8).toUpperCase() || "ORDER",
+          amount: total,
+        });
+        setShowPaymentModal(true);
+      } else {
+        // For pay at pickup, go directly to success
+        clearCart();
+        navigate("/order-success");
+      }
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -407,6 +466,107 @@ const CheckoutPage = () => {
           </div>
         </form>
       </div>
+
+      {/* UPI Payment Modal */}
+      {showPaymentModal && orderDetails && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <h2 className="text-2xl font-bold text-gray-900">Complete Payment</h2>
+              <button
+                onClick={() => {
+                  setShowPaymentModal(false);
+                  clearCart();
+                  navigate("/order-success");
+                }}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              >
+                <HiX className="w-6 h-6 text-gray-500" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6">
+              {/* Amount Display */}
+              <div className="text-center mb-6">
+                <p className="text-sm text-gray-500 mb-1">Amount to Pay</p>
+                <p className="text-4xl font-bold text-green-600">
+                  ₹{orderDetails.amount.toFixed(2)}
+                </p>
+                <p className="text-sm text-gray-500 mt-2">
+                  Order #{orderDetails.orderId}
+                </p>
+              </div>
+
+              {/* QR Code Section */}
+              <div className="bg-gray-50 rounded-xl p-6 mb-6">
+                <p className="text-center text-sm font-semibold text-gray-700 mb-4">
+                  Scan QR code with any UPI app
+                </p>
+                <div className="flex justify-center mb-4">
+                  <div className="bg-white p-4 rounded-xl shadow-lg">
+                    <QRCodeSVG
+                      value={generateUPIUrl(orderDetails.amount, orderDetails.orderId)}
+                      size={180}
+                      level="H"
+                      marginSize={2}
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-center space-x-4 text-gray-400">
+                  <FaGooglePay className="w-8 h-8" />
+                  <SiPhonepe className="w-8 h-8" />
+                  <SiPaytm className="w-8 h-8" />
+                </div>
+              </div>
+
+              {/* Mobile Payment Button */}
+              {isMobile() && (
+                <button
+                  onClick={handleUPIPayment}
+                  className="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-4 px-6 rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all duration-200 shadow-lg mb-4"
+                >
+                  <FaGooglePay className="w-6 h-6" />
+                  <span>Pay with UPI App</span>
+                </button>
+              )}
+
+              {/* UPI ID Display */}
+              <div className="bg-blue-50 rounded-xl p-4 mb-6">
+                <p className="text-sm text-gray-600 mb-2">Or pay directly to UPI ID:</p>
+                <div className="flex items-center justify-between bg-white rounded-lg px-4 py-3 border border-blue-200">
+                  <span className="font-mono font-semibold text-gray-900">
+                    {MERCHANT_UPI_ID}
+                  </span>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(MERCHANT_UPI_ID);
+                      alert("UPI ID copied!");
+                    }}
+                    className="text-blue-600 hover:text-blue-700 font-semibold text-sm"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+
+              {/* Complete Payment Button */}
+              <button
+                onClick={handlePaymentComplete}
+                className="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold py-4 px-6 rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all duration-200 shadow-lg"
+              >
+                <HiCheckCircle className="w-6 h-6" />
+                <span>I've Completed the Payment</span>
+              </button>
+
+              <p className="text-center text-xs text-gray-500 mt-4">
+                Click above after completing payment in your UPI app
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

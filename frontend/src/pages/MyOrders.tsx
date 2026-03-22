@@ -236,16 +236,16 @@ const MyOrdersPage = () => {
                             Contact Number
                           </p>
                           <a
-                            href={`tel:${order.farmerPhone || "+919876543210"}`}
+                            href={`tel:${order.farmerPhone || "+918078390442"}`}
                             className="font-semibold text-green-600 hover:text-green-700"
                           >
-                            {order.farmerPhone || "+91 98765-43210"}
+                            {order.farmerPhone || "+91 80783-90442"}
                           </a>
                         </div>
                       </div>
                       <a
                         href={`https://wa.me/${(
-                          order.farmerPhone || "919876543210"
+                          order.farmerPhone || "918078390442"
                         ).replace(/[^0-9]/g, "")}`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -281,7 +281,15 @@ const MyOrdersPage = () => {
                           </p>
                         </div>
                       )}
-                      <button className="w-full flex items-center justify-center space-x-2 bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700 transition-all duration-200">
+                      <button
+                        onClick={() =>
+                          window.open(
+                            "https://www.google.com/maps/place/Pala,+Kerala/@9.7162769,76.6672322,6914m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3b07cdceb06d5e9f:0xb33a8fbfd6cf2e34!8m2!3d9.7130944!4d76.6832839!16zL20vMDE3enI4?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D",
+                            "_blank"
+                          )
+                        }
+                        className="w-full flex items-center justify-center space-x-2 bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700 transition-all duration-200"
+                      >
                         <HiLocationMarker className="w-5 h-5" />
                         <span>View on Map</span>
                       </button>
